@@ -15,26 +15,12 @@
     </div>
 
     <RouterView v-if="isRefresh" v-slot="{ Component, route }" :style="contentStyle">
-      <!-- 缓存路由动画 -->
+      <!-- 统一处理缓存与非缓存路由动画，避免两个 Transition 同时参与文档流 -->
       <Transition :name="showTransitionMask ? '' : actualTransition" mode="out-in" appear>
-        <KeepAlive :max="10" :exclude="keepAliveExclude">
-          <component
-            class="art-page-view"
-            :is="Component"
-            :key="route.path"
-            v-if="route.meta.keepAlive"
-          />
+        <!-- KeepAlive 始终挂载，非缓存路由通过 exclude 动态处理 -->
+        <KeepAlive :max="10" :exclude="routeCacheExclude">
+          <component class="art-page-view" :is="Component" :key="route.path" />
         </KeepAlive>
-      </Transition>
-
-      <!-- 非缓存路由动画 -->
-      <Transition :name="showTransitionMask ? '' : actualTransition" mode="out-in" appear>
-        <component
-          class="art-page-view"
-          :is="Component"
-          :key="route.path"
-          v-if="!route.meta.keepAlive"
-        />
       </Transition>
     </RouterView>
 
@@ -60,6 +46,15 @@
   const { containerMinHeight } = useAutoLayoutHeight()
   const { pageTransition, containerWidth, refresh } = storeToRefs(useSettingStore())
   const { keepAliveExclude } = storeToRefs(useWorktabStore())
+
+  // 当前非缓存路由动态排除，保持原有的页面缓存策略
+  const routeCacheExclude = computed(() => {
+    const exclude = new Set(keepAliveExclude.value)
+    if (!route.meta.keepAlive && typeof route.name === 'string') {
+      exclude.add(route.name)
+    }
+    return [...exclude]
+  })
 
   const isRefresh = shallowRef(true)
   const isOpenRouteInfo = import.meta.env.VITE_OPEN_ROUTE_INFO
