@@ -101,4 +101,4 @@ If you feel this project has reduced your development costs and solved problems 
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Daymychen/art-design-pro&type=Date)](https://www.star-history.com/#Daymychen/art-design-pro&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=Daymychen/art-design-pro&type=Date)](https://star-history.dera.page/#Daymychen/art-design-pro&Date)

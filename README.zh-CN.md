@@ -101,4 +101,4 @@ QQ群：<a href="https://qm.qq.com/cgi-bin/qm/qr?k=Gg6yzZLFaNgmRhK0T5Qcjf7-XcAFW
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Daymychen/art-design-pro&type=Date)](https://www.star-history.com/#Daymychen/art-design-pro&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=Daymychen/art-design-pro&type=Date)](https://star-history.dera.page/#Daymychen/art-design-pro&Date)
